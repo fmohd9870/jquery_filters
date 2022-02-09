@@ -61,11 +61,12 @@ $(document).ready(function(){
     var values=$("#search-input").val();
     by_search(temp,values);
   });
-  $(".delete").on("click",function(){
-    // var row_id=$(this).attr("data-id");
+  $("#tbody").on("click",".delete",function(){
+    console.log("hii");
     var values=$(this).attr("data-id");
     console.log("delete id="+$(this).attr("data-id"));
     $("#r"+values).css("display","none");
+    // var row_id=$(this).attr("data-id")
   });
   
 });
