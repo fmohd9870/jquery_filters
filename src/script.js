@@ -58,8 +58,12 @@ $(document).ready(function () {
   });
   $("#search-btn").click(function () {
     var temp = 0;
+    if($("#search-input").val()==""){
+      display_products();
+    }else{
     var values = $("#search-input").val();
     by_search(temp, values);
+    }
   });
   $("#tbody").on("click", ".delete", function () {
     console.log("hii");
@@ -141,7 +145,7 @@ function by_search(temp, values) {
   console.log("brand selected");
   console.log(values);
   for (var i = 0; i < products.length; i++) {
-    if ("'" + values + "'" == "'" + products[i].id + "'") {
+    if ("'" + values + "'" == "'" + products[i].id + "'" || "'" + values + "'" == "'" + products[i].name + "'" || "'" + values + "'" == "'" + products[i].brand + "'" || "'" + values + "'" == "'" + products[i].os + "'"  ) {
       console.log(products[i].brand);
       temp +=
         "<tr class='row' id='r" +
