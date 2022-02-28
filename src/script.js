@@ -36,23 +36,40 @@ var products = [
     os: "Windows",
   },
 ];
+var brands = [
+  { name: "All Brands", value: "1" },
+  { name: "Apple", value: "Apple" },
+  { name: "Motorola", value: "Motorola" },
+  { name: "Samsung", value: "Samsung" },
+  { name: "ASUS", value: "ASUS" },
+  { name: "Microsoft", value: "Microsoft" },
+];
+var os = [
+  { name: "All OS", value: "1" },
+  { name: "iOS", value: "iOS" },
+  { name: "Android", value: "Android" },
+  { name: "Windows", value: "Windows" },
+];
+display_products();
+display_brands();
+display_os();
 $(document).ready(function () {
-  display_products();
-  $("#brand").on("change", function () {
+  $("#brand").on("change", "#brand_select", function () {
     table = 0;
-    if ($("#brand").val() == "1") {
+    var arg1 = $(this).find(":selected").attr("data-id");
+    console.log(arg1);
+    if (arg1 == "1") {
       display_products();
     } else {
-      var arg1 = $("#brand").val();
       by_brand(table, arg1);
     }
   });
-  $("#brand").on("change", function () {
+  $("#brand").on("change", "#brand_select", function () {
+    var arg1 = $(this).find(":selected").attr("data-id");
     if (
-      $("#os").on("change", function () {
+      $("#os").on("change", "#os_select", function () {
         table = 0;
-        var arg1 = $("#brand").val();
-        var arg2 = $("#os").val();
+        var arg2 = $(this).find(":selected").attr("data-os");
         if (arg2 == 1) {
           by_brand(table, arg1);
         } else {
@@ -66,21 +83,21 @@ $(document).ready(function () {
     );
   });
 
-  $("#os").on("change", function () {
+  $("#os").on("change", "#os_select", function () {
     table = 0;
-    if ($("#os").val() == "1") {
+    var arg1 = $(this).find(":selected").attr("data-os");
+    if (arg1 == "1") {
       display_products();
     } else {
-      var arg1 = $("#os").val();
       by_os(table, arg1);
     }
   });
-  $("#os").on("change", function () {
+  $("#os").on("change", "#os_select", function () {
+    var arg2 = $(this).find(":selected").attr("data-os");
     if (
-      $("#brand").on("change", function () {
+      $("#brand").on("change", "#brand_select", function () {
         table = 0;
-        var arg1 = $("#brand").val();
-        var arg2 = $("#os").val();
+        var arg1 = $(this).find(":selected").attr("data-id");
         if (arg1 == 1) {
           by_os(table, arg2);
         } else {
@@ -229,4 +246,34 @@ function run1(table, arg1, arg2) {
     }
   }
   $("#tbody").html(table);
+}
+function display_brands() {
+  var disp = "<select id='brand_select' name='brand'>";
+  for (var i = 0; i < brands.length; i++) {
+    disp +=
+      "<option data-id='" +
+      brands[i].value +
+      "' value='" +
+      brands[i].value +
+      "'>" +
+      brands[i].name +
+      "</option>";
+  }
+  disp += "</select>";
+  $("#brand").html(disp);
+}
+function display_os() {
+  var disp = "<select id='os_select' name='os'>";
+  for (var i = 0; i < os.length; i++) {
+    disp +=
+      "<option data-os='" +
+      os[i].value +
+      "' value='" +
+      os[i].value +
+      "'>" +
+      os[i].name +
+      "</option>";
+  }
+  disp += "</select>";
+  $("#os").html(disp);
 }
